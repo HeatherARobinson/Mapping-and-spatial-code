@@ -1,9 +1,6 @@
-setwd("C:/Users/mqbpjhr4/Documents/Analysis")
-sampledata<-read.table("byhostdata.txt", header=TRUE)  
 
 #Use bioclim tiff OR bil files downloaded from www.worldclim.org/bioclim and put in working directory (or access them directly online)
 
-memory.limit(100000)	#Assign more RAM to R
 library(raster)		#Load necessary packages
 library(rgdal)
 
