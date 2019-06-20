@@ -1,0 +1,16 @@
+#Use elevation data accessed through the elevatr package courtesy of The USGS Elevation Point Query Service.
+#See https://cran.r-project.org/web/packages/elevatr/vignettes/introduction_to_elevatr.html
+install.packages("elevatr")
+install.packages("rgdal")
+library(rgdal)
+library(elevatr)
+
+sampledata<-data[,!c("x","y")] #everything other than variables x and y
+
+prj_dd <- "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+examp_sp <- sp::SpatialPoints(sp::coordinates(sampledata), proj4string = sp::CRS(prj_dd)) 
+examp_spdf <- SpatialPointsDataFrame(examp_sp, proj4string = CRS(prj_dd), data = sampledata)
+get_elev_point(locations = examp_sp, units="meters", prj = prj_dd) 
+
+#Produces a text output file 'edata.txt'
+write.csv(edata,"merged_elevation.csv")
